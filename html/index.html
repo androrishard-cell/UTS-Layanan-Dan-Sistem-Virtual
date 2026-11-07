@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal LMS – Pembelajaran Virtual</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="nav-icon">🎓</span>
+      <span>EduVirtual LMS</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#beranda" class="active">Beranda</a></li>
+      <li><a href="#materi">Materi</a></li>
+      <li><a href="#tugas">Tugas</a></li>
+      <li><a href="#ujian">Ujian</a></li>
+    </ul>
+    <div class="nav-user">
+      <span class="avatar">M</span>
+      <span class="user-name">Mahasiswa</span>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="beranda">
+    <div class="hero-content">
+      <h1>Selamat Datang di <span class="highlight">EduVirtual LMS</span></h1>
+      <p>Platform pembelajaran daring terpadu untuk 500 mahasiswa. Akses materi, kumpulkan tugas, dan ikuti ujian kapan saja dan di mana saja.</p>
+      <div class="hero-buttons">
+        <a href="#materi" class="btn btn-primary">Mulai Belajar</a>
+        <a href="#tugas" class="btn btn-outline">Kumpulkan Tugas</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-number" data-target="500">0</span>
+        <span class="stat-label">Mahasiswa</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="24">0</span>
+        <span class="stat-label">Mata Kuliah</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="128">0</span>
+        <span class="stat-label">Materi</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="98">0</span>
+        <span class="stat-label">% Uptime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERI SECTION -->
+  <section class="section" id="materi">
+    <div class="section-header">
+      <h2>📚 Materi Kuliah</h2>
+      <p>Akses seluruh materi perkuliahan yang tersedia</p>
+    </div>
+    <div class="card-grid">
+      <div class="course-card">
+        <div class="course-icon" style="background: linear-gradient(135deg,#667eea,#764ba2);">💻</div>
+        <h3>Sistem Operasi</h3>
+        <p>Pengenalan OS, proses, manajemen memori & keamanan sistem.</p>
+        <div class="progress-bar"><div class="progress" style="width:75%"></div></div>
+        <span class="progress-label">Progress: 75%</span>
+        <a href="#" class="btn btn-sm btn-primary">Buka Materi</a>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background: linear-gradient(135deg,#f093fb,#f5576c);">🌐</div>
+        <h3>Jaringan Komputer</h3>
+        <p>TCP/IP, routing, switching, dan keamanan jaringan modern.</p>
+        <div class="progress-bar"><div class="progress" style="width:60%"></div></div>
+        <span class="progress-label">Progress: 60%</span>
+        <a href="#" class="btn btn-sm btn-primary">Buka Materi</a>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background: linear-gradient(135deg,#4facfe,#00f2fe);">☁️</div>
+        <h3>Layanan Virtual</h3>
+        <p>Cloud computing, virtualisasi, dan containerisasi (Docker).</p>
+        <div class="progress-bar"><div class="progress" style="width:90%"></div></div>
+        <span class="progress-label">Progress: 90%</span>
+        <a href="#" class="btn btn-sm btn-primary">Buka Materi</a>
+      </div>
+      <div class="course-card">
+        <div class="course-icon" style="background: linear-gradient(135deg,#43e97b,#38f9d7);">🗄️</div>
+        <h3>Basis Data</h3>
+        <p>Desain ERD, SQL, normalisasi, dan manajemen database.</p>
+        <div class="progress-bar"><div class="progress" style="width:50%"></div></div>
+        <span class="progress-label">Progress: 50%</span>
+        <a href="#" class="btn btn-sm btn-primary">Buka Materi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUGAS SECTION -->
+  <section class="section alt-bg" id="tugas">
+    <div class="section-header">
+      <h2>📝 Pengumpulan Tugas</h2>
+      <p>Upload tugas kelompok Anda di sini sebelum batas waktu</p>
+    </div>
+    <div class="upload-wrapper">
+      <div class="upload-box" id="dropZone">
+        <div class="upload-icon">📂</div>
+        <h3>Seret & Lepas file di sini</h3>
+        <p>atau klik tombol di bawah untuk memilih file</p>
+        <p class="upload-hint">Mendukung: PDF, DOC, DOCX, ZIP (maks. 10 MB)</p>
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.zip" hidden />
+        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Pilih File</button>
+        <div id="fileInfo" class="file-info hidden"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" class="form-control" placeholder="Masukkan nama lengkap Anda" />
+      </div>
+      <div class="form-group">
+        <label>NIM</label>
+        <input type="text" class="form-control" placeholder="Contoh: 2024001234" />
+      </div>
+      <div class="form-group">
+        <label>Mata Kuliah</label>
+        <select class="form-control">
+          <option>-- Pilih Mata Kuliah --</option>
+          <option>Sistem Operasi</option>
+          <option>Jaringan Komputer</option>
+          <option>Layanan Virtual</option>
+          <option>Basis Data</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Keterangan (opsional)</label>
+        <textarea class="form-control" rows="3" placeholder="Tambahkan catatan untuk dosen..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-full" id="submitBtn" onclick="submitTugas()">📤 Kumpulkan Tugas</button>
+      <div id="successMsg" class="success-msg hidden">✅ Tugas berhasil dikumpulkan! Terima kasih.</div>
+    </div>
+  </section>
+
+  <!-- UJIAN SECTION -->
+  <section class="section" id="ujian">
+    <div class="section-header">
+      <h2>📋 Jadwal Ujian</h2>
+      <p>Pantau jadwal dan ikuti ujian secara daring</p>
+    </div>
+    <div class="exam-table-wrapper">
+      <table class="exam-table">
+        <thead>
+          <tr>
+            <th>Mata Kuliah</th>
+            <th>Tanggal</th>
+            <th>Waktu</th>
+            <th>Durasi</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sistem Operasi</td>
+            <td>Senin, 10 Nov 2026</td>
+            <td>08:00 – 10:00</td>
+            <td>120 menit</td>
+            <td><span class="badge badge-upcoming">Mendatang</span></td>
+            <td><button class="btn btn-sm btn-outline" disabled>Belum Dibuka</button></td>
+          </tr>
+          <tr>
+            <td>Jaringan Komputer</td>
+            <td>Rabu, 12 Nov 2026</td>
+            <td>10:00 – 12:00</td>
+            <td>120 menit</td>
+            <td><span class="badge badge-upcoming">Mendatang</span></td>
+            <td><button class="btn btn-sm btn-outline" disabled>Belum Dibuka</button></td>
+          </tr>
+          <tr>
+            <td>Layanan Virtual</td>
+            <td>Jumat, 07 Nov 2026</td>
+            <td>13:00 – 15:00</td>
+            <td>120 menit</td>
+            <td><span class="badge badge-open">Berlangsung</span></td>
+            <td><button class="btn btn-sm btn-primary" onclick="alert('Ujian dimulai! Semangat 💪')">Mulai Ujian</button></td>
+          </tr>
+          <tr>
+            <td>Basis Data</td>
+            <td>Kamis, 06 Nov 2026</td>
+            <td>09:00 – 11:00</td>
+            <td>120 menit</td>
+            <td><span class="badge badge-done">Selesai</span></td>
+            <td><button class="btn btn-sm btn-outline">Lihat Nilai</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="nav-icon">🎓</span>
+        <span>EduVirtual LMS</span>
+      </div>
+      <p>Platform Pembelajaran Daring – Universitas Virtual © 2026</p>
+      <p>Studi Kasus: Layanan Virtual untuk 500 Mahasiswa</p>
+    </div>
+    <div class="footer-clock">
+      <div id="clock" class="clock-display">--:--:--</div>
+      <div id="clockDate" class="clock-date"></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
