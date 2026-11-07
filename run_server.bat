@@ -18,10 +18,14 @@ if errorlevel 1 (
 )
 
 echo  [OK] Python ditemukan.
-echo  [INFO] Memulai server pada http://localhost:8080
+echo  [INFO] Memulai server pada http://localhost:8080/login.html
 echo  [INFO] Tekan Ctrl+C untuk menghentikan server.
 echo.
 
 cd /d "%~dp0html"
+
+:: Buka browser otomatis ke halaman login setelah 1 detik
+start "" timeout /t 1 >nul & start "" "http://localhost:8080/login.html"
+
 python -m http.server 8080
 pause

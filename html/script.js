@@ -1,7 +1,33 @@
 /* =============================================
    EduVirtual LMS – script.js
-   Interaktivitas: animasi angka, upload, jam, drag‑drop
+   Interaktivitas: animasi, upload, jam, auth UI
    ============================================= */
+
+/* ── PROTEKSI HALAMAN ── */
+// Pastikan user sudah login; redirect ke login.html jika belum
+const session = requireAuth();
+
+/* ── ISI INFO USER DI NAVBAR & HERO ── */
+if (session) {
+  const navAvatar = document.getElementById('navAvatar');
+  const navName   = document.getElementById('navName');
+  const greeting  = document.getElementById('heroGreeting');
+  const namaInput = document.getElementById('namaInput');
+  const nimInput  = document.getElementById('nimInput');
+
+  if (navAvatar) navAvatar.textContent = session.name.charAt(0).toUpperCase();
+  if (navName)   navName.textContent   = session.name;
+
+  // Greeting berdasarkan waktu
+  const hour = new Date().getHours();
+  const sapa = hour < 11 ? 'Selamat pagi' : hour < 15 ? 'Selamat siang' : hour < 18 ? 'Selamat sore' : 'Selamat malam';
+  if (greeting) greeting.textContent = `${sapa}, ${session.name} 👋`;
+
+  // Auto-isi form tugas
+  if (namaInput) namaInput.value = session.name;
+  if (nimInput && session.nim) nimInput.value = session.nim;
+}
+
 
 /* ── 1. ANIMASI ANGKA STATISTIK ── */
 function animateCounter(el) {
@@ -31,7 +57,6 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.5 }
 );
-
 document.querySelectorAll('.stat-number').forEach(el => observer.observe(el));
 
 
@@ -88,9 +113,9 @@ if (dropZone) {
 
 /* ── 4. SUBMIT TUGAS (simulasi) ── */
 function submitTugas() {
-  const nama    = document.querySelector('input[placeholder="Masukkan nama lengkap Anda"]');
-  const nim     = document.querySelector('input[placeholder="Contoh: 2024001234"]');
-  const matkul  = document.querySelector('select.form-control');
+  const nama    = document.getElementById('namaInput');
+  const nim     = document.getElementById('nimInput');
+  const matkul  = document.getElementById('matkulSelect');
   const successMsg = document.getElementById('successMsg');
 
   if (!nama || !nama.value.trim()) { alert('⚠️ Nama lengkap harus diisi!'); return; }
@@ -102,7 +127,6 @@ function submitTugas() {
     alert('⚠️ Pilih file tugas terlebih dahulu!'); return;
   }
 
-  // Simulasi pengiriman
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = '⏳ Mengirim...';
@@ -111,10 +135,7 @@ function submitTugas() {
     successMsg.classList.remove('hidden');
     btn.textContent = '✅ Terkirim';
 
-    // Reset form setelah 3 detik
     setTimeout(() => {
-      nama.value = '';
-      nim.value  = '';
       matkul.selectedIndex = 0;
       fileInfo.classList.add('hidden');
       successMsg.classList.add('hidden');

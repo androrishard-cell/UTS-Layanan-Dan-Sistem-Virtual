@@ -21,14 +21,16 @@
       <li><a href="#ujian">Ujian</a></li>
     </ul>
     <div class="nav-user">
-      <span class="avatar">M</span>
-      <span class="user-name">Mahasiswa</span>
+      <span class="avatar" id="navAvatar">?</span>
+      <span class="user-name" id="navName">–</span>
+      <button class="btn btn-sm btn-logout" id="btnLogout" onclick="logout()" title="Keluar">🚪 Keluar</button>
     </div>
   </nav>
 
   <!-- HERO SECTION -->
   <section class="hero" id="beranda">
     <div class="hero-content">
+      <p class="hero-greeting" id="heroGreeting">Selamat datang! 👋</p>
       <h1>Selamat Datang di <span class="highlight">EduVirtual LMS</span></h1>
       <p>Platform pembelajaran daring terpadu untuk 500 mahasiswa. Akses materi, kumpulkan tugas, dan ikuti ujian kapan saja dan di mana saja.</p>
       <div class="hero-buttons">
@@ -66,7 +68,7 @@
       <div class="course-card">
         <div class="course-icon" style="background: linear-gradient(135deg,#667eea,#764ba2);">💻</div>
         <h3>Sistem Operasi</h3>
-        <p>Pengenalan OS, proses, manajemen memori & keamanan sistem.</p>
+        <p>Pengenalan OS, proses, manajemen memori &amp; keamanan sistem.</p>
         <div class="progress-bar"><div class="progress" style="width:75%"></div></div>
         <span class="progress-label">Progress: 75%</span>
         <a href="#" class="btn btn-sm btn-primary">Buka Materi</a>
@@ -107,7 +109,7 @@
     <div class="upload-wrapper">
       <div class="upload-box" id="dropZone">
         <div class="upload-icon">📂</div>
-        <h3>Seret & Lepas file di sini</h3>
+        <h3>Seret &amp; Lepas file di sini</h3>
         <p>atau klik tombol di bawah untuk memilih file</p>
         <p class="upload-hint">Mendukung: PDF, DOC, DOCX, ZIP (maks. 10 MB)</p>
         <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.zip" hidden />
@@ -117,15 +119,15 @@
 
       <div class="form-group">
         <label>Nama Lengkap</label>
-        <input type="text" class="form-control" placeholder="Masukkan nama lengkap Anda" />
+        <input type="text" id="namaInput" class="form-control" placeholder="Masukkan nama lengkap Anda" />
       </div>
       <div class="form-group">
         <label>NIM</label>
-        <input type="text" class="form-control" placeholder="Contoh: 2024001234" />
+        <input type="text" id="nimInput" class="form-control" placeholder="Contoh: 2024001234" />
       </div>
       <div class="form-group">
         <label>Mata Kuliah</label>
-        <select class="form-control">
+        <select class="form-control" id="matkulSelect">
           <option>-- Pilih Mata Kuliah --</option>
           <option>Sistem Operasi</option>
           <option>Jaringan Komputer</option>
@@ -214,6 +216,8 @@
     </div>
   </footer>
 
+  <!-- Load auth first (provides requireAuth & logout), then UI script -->
+  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
