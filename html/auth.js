@@ -3,17 +3,20 @@
    EduVirtual LMS (pure HTML+JS, localStorage)
    ============================================= */
 
-/* ── AKUN DEMO ── */
+/* ── DAFTAR AKUN ── */
 const USERS = {
   mahasiswa: [
-    { id: '248111057', password: 'mhs123', name: 'Mahasiswa 248111057', role: 'mahasiswa', nim: '248111057', prodi: 'Teknik Informatika' },
-    { id: '2024001',   password: 'mhs123', name: 'Budi Santoso',        role: 'mahasiswa', nim: '2024001',   prodi: 'Teknik Informatika' },
-    { id: '2024002',   password: 'mhs123', name: 'Siti Rahayu',         role: 'mahasiswa', nim: '2024002',   prodi: 'Sistem Informasi'   },
-    { id: '2024003',   password: 'mhs123', name: 'Ahmad Fauzi',         role: 'mahasiswa', nim: '2024003',   prodi: 'Teknik Komputer'    },
+    { id: '248111057', password: 'mhs123', name: 'Andro Rishard Imanuel Nailebas', role: 'mahasiswa', nim: '248111057', prodi: 'Teknik Informatika' },
+    { id: '248111067', password: 'mhs123', name: 'Elluan',                          role: 'mahasiswa', nim: '248111067', prodi: 'Teknik Informatika' },
+    { id: '248111053', password: 'mhs123', name: 'Erkes Thon Neno',                 role: 'mahasiswa', nim: '248111053', prodi: 'Teknik Informatika' },
+    { id: '24811048',  password: 'mhs123', name: 'Stiven Dju',                      role: 'mahasiswa', nim: '24811048',  prodi: 'Teknik Informatika' },
+    { id: '248111056', password: 'mhs123', name: 'Odi Kase',                        role: 'mahasiswa', nim: '248111056', prodi: 'Teknik Informatika' },
+    { id: '2024001',   password: 'mhs123', name: 'Budi Santoso',                    role: 'mahasiswa', nim: '2024001',   prodi: 'Teknik Informatika' },
+    { id: '2024002',   password: 'mhs123', name: 'Siti Rahayu',                     role: 'mahasiswa', nim: '2024002',   prodi: 'Sistem Informasi'   },
   ],
   dosen: [
-    { id: 'dosen01', password: 'dsn123', name: 'Dr. Hendra, M.Kom',    role: 'dosen', nip: 'NIP001', matkul: 'Layanan Virtual'    },
-    { id: 'dosen02', password: 'dsn123', name: 'Prof. Lestari, Ph.D',  role: 'dosen', nip: 'NIP002', matkul: 'Jaringan Komputer'  },
+    { id: 'dosen01', password: 'dsn123', name: 'Dr. Hendra, M.Kom',   role: 'dosen', nip: 'NIP001', matkul: 'Layanan Virtual'   },
+    { id: 'dosen02', password: 'dsn123', name: 'Prof. Lestari, Ph.D', role: 'dosen', nip: 'NIP002', matkul: 'Jaringan Komputer' },
   ]
 };
 
@@ -32,11 +35,11 @@ function switchRole(role) {
   tabD.classList.toggle('active', role === 'dosen');
 
   if (role === 'mahasiswa') {
-    label.textContent = 'NIM / Username';
-    usrInp.placeholder = 'Masukkan NIM Anda';
+    label.textContent    = 'NIM / Username';
+    usrInp.placeholder   = 'Masukkan NIM Anda';
   } else {
-    label.textContent = 'ID Dosen';
-    usrInp.placeholder = 'Masukkan ID Dosen';
+    label.textContent    = 'ID Dosen';
+    usrInp.placeholder   = 'Masukkan ID Dosen';
   }
   hideAlerts();
 }
@@ -89,17 +92,14 @@ function handleLogin(e) {
   const remember = document.getElementById('rememberMe').checked;
   const btn      = document.getElementById('btnLogin');
 
-  // Tampilkan loading
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Memverifikasi...';
 
-  // Simulasi delay autentikasi
   setTimeout(() => {
     const userList = USERS[currentRole];
     const found    = userList.find(u => u.id === userId && u.password === password);
 
     if (found) {
-      // Simpan sesi
       const session = {
         ...found,
         loginTime: new Date().toISOString(),
@@ -113,11 +113,10 @@ function handleLogin(e) {
 
       setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     } else {
-      showError('Username / password salah. Coba lagi.');
+      showError('NIM / password salah. Periksa kembali dan coba lagi.');
       btn.disabled = false;
       btn.innerHTML = '🔑 Masuk';
 
-      // Shake animasi pada card
       const card = document.querySelector('.login-card');
       card.style.animation = 'none';
       card.style.transform = 'translateX(-8px)';
@@ -135,21 +134,21 @@ function handleLogin(e) {
   if (rem) {
     try {
       const { id, role } = JSON.parse(rem);
-      document.getElementById('username').value = id;
+      document.getElementById('username').value  = id;
       document.getElementById('rememberMe').checked = true;
       switchRole(role);
     } catch {}
   }
 })();
 
-/* ── LOGOUT (dipanggil dari index.html) ── */
+/* ── LOGOUT ── */
 function logout() {
   sessionStorage.removeItem('lms_session');
   localStorage.removeItem('lms_remember');
   window.location.href = 'login.html';
 }
 
-/* ── PROTEKSI HALAMAN (index.html memanggil ini) ── */
+/* ── PROTEKSI HALAMAN ── */
 function requireAuth() {
   const session = sessionStorage.getItem('lms_session');
   if (!session) {
